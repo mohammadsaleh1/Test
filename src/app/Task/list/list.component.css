@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+  }
+ .icon-delete{
+    color: red;
+ }
+ .icon-view{
+     color : blue;  
+ }  
+ .displayError{
+    text-align: center;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: larger;
+    
+ }
+ .icon-error{
+     color: red;
+ }

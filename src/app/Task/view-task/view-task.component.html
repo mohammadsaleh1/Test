@@ -1,0 +1,25 @@
+
+<div *ngIf="Task"> 
+<div class="card">
+	
+	<h4>Description</h4>
+	<p class="title">{{Task.TaskDescription}}</p>
+	<a ><i class="fa fa-dribbble">CreateDate :{{Task.CreateDate|date:'yyyy-MM-dd '}}</i></a>
+	<hr>
+	<a ><i class="fa faRed">Deadline :{{Task.EndDate|date:'yyyy-MM-dd'}}</i></a>
+	<hr>
+	<p><button>Catgories :</button></p>
+	<div *ngFor="let t of Task.Catgories">
+		<div  [ngStyle]="{ 'background-color': t.color }">{{t.Name}}</div>
+	</div>
+	<hr>
+	<p><button>Tasks :</button></p>
+
+	<div *ngFor="let t of Task.SubTask">
+			<div>{{t}}</div>
+		</div>
+	<a href="#"><i class="fa fa-linkedin"></i></a>
+	<a href="#"><i class="fa fa-facebook"></i></a>
+	
+  </div>
+</div>

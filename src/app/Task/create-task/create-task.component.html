@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create Task</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <form #Taskes="ngForm" (ngSubmit)="SaveTask(Task)">
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="Description">Description</label>
+
+            <input required minlength="10" type="text" class="form-control "
+                [class.is-invalid]="TaskDescription.invalid && (TaskDescription.dirty || TaskDescription.touched)"
+                id="Description" placeholder="Enter Description" name="Description" [(ngModel)]="Task.TaskDescription"
+                #TaskDescription="ngModel">
+            <div *ngIf="TaskDescription.invalid && (TaskDescription.dirty || TaskDescription.touched)"
+                class="help-block">
+                <div *ngIf="TaskDescription.errors.required">
+                    Description is required.
+                </div>
+                <div *ngIf="TaskDescription.errors.minlength">
+                    Description must be at least 10 characters long.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CrateDate-->
+        <div class="form-group">
+            <label for="CreateDate">CreateDate</label>
+            <div class="input-group">
+                <input required id="CreateDate" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker
+                    name="CreateDate" [(ngModel)]="Task.CreateDate" #CreateDate="ngModel" #dp="ngbDatepicker"
+                    [class.is-invalid]="CreateDate.invalid && (CreateDate.dirty || CreateDate.touched)">
+                <div class="input-group-append">
+                    <button class="btn butt" (click)="dp.toggle()" type="button">
+                        <i class="material-icons">date_range</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <!-- EndDate-->
+        <div class="form-group">
+            <label for="EndDate">EndDate</label>
+            <div class="input-group">
+                <input required id="EndDate" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker name="EndDate"
+                    [(ngModel)]="Task.EndDate" #EndDate="ngModel" #dp3="ngbDatepicker"
+                    [class.is-invalid]="EndDate.invalid && (EndDate.dirty || EndDate.touched)">
+                <div class="input-group-append">
+                    <button class="btn butt" (click)="dp3.toggle()" type="button">
+                        <i class="material-icons">date_range</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sub task -->
+        <button type="button" (click)="add()" class="btn btn-success">Add Task</button>
+
+        <div *ngFor="let item of Task.SubTask;let index = index;">
+            <div class="form-group">
+                <input [(ngModel)]="Task.SubTask[index]" [name]="Task.SubTask[index]+ '_' + index"
+                    value="Task.SubTask[index]" class="form-control" />
+            </div>
+        </div>
+
+         <!-- multiselect-->
+
+        <label for="Daedline">Catgories</label>
+        <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [data]="Catgories" [(ngModel)]="Task.Catgories"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+            name="Catgories" required>
+        </ng-multiselect-dropdown>
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+
+            <button type="submit" [disabled]="Taskes.invalid" class="btn btn-outline-primary">save</button>
+        </div>
+    </form>
+
+</div>
